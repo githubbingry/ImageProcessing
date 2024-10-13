@@ -44,17 +44,18 @@ public class ImageProcessor extends javax.swing.JFrame {
         btnFailureBlur = new javax.swing.JButton();
         btnBrighter = new javax.swing.JButton();
         btnMonoChrome = new javax.swing.JButton();
-        btnInvertImage = new javax.swing.JButton();
-        btnReturnNormal = new javax.swing.JButton();
+        btnInvert = new javax.swing.JButton();
+        btnNormal = new javax.swing.JButton();
         btnSepia = new javax.swing.JButton();
         btnGreyScale = new javax.swing.JButton();
         btnGaussianBlur = new javax.swing.JButton();
         btnDarker = new javax.swing.JButton();
         btnBlur = new javax.swing.JButton();
         btnPixelated = new javax.swing.JButton();
-        btnShowRedOnly = new javax.swing.JButton();
-        btnShowGreenOnly = new javax.swing.JButton();
-        btnShowBlueOnly = new javax.swing.JButton();
+        btnShowRed = new javax.swing.JButton();
+        btnShowGreen = new javax.swing.JButton();
+        btnShowBlue = new javax.swing.JButton();
+        btnTransparency = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuOpenImage = new javax.swing.JMenu();
         mnitOpenImage = new javax.swing.JMenuItem();
@@ -80,7 +81,7 @@ public class ImageProcessor extends javax.swing.JFrame {
         pnlButton.setBackground(new java.awt.Color(18, 52, 86));
         pnlButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 102), 2, true));
 
-        btnFailureBlur.setText("Failure Blur Image");
+        btnFailureBlur.setText("Failure Blur");
         btnFailureBlur.setEnabled(false);
         btnFailureBlur.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,7 +97,7 @@ public class ImageProcessor extends javax.swing.JFrame {
             }
         });
 
-        btnMonoChrome.setText("MonoChrome Image");
+        btnMonoChrome.setText("MonoChrome");
         btnMonoChrome.setEnabled(false);
         btnMonoChrome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,23 +105,23 @@ public class ImageProcessor extends javax.swing.JFrame {
             }
         });
 
-        btnInvertImage.setText("Invert Image");
-        btnInvertImage.setEnabled(false);
-        btnInvertImage.addActionListener(new java.awt.event.ActionListener() {
+        btnInvert.setText("Invert");
+        btnInvert.setEnabled(false);
+        btnInvert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInvertImageActionPerformed(evt);
+                btnInvertActionPerformed(evt);
             }
         });
 
-        btnReturnNormal.setText("Return Normal");
-        btnReturnNormal.setEnabled(false);
-        btnReturnNormal.addActionListener(new java.awt.event.ActionListener() {
+        btnNormal.setText("Normal");
+        btnNormal.setEnabled(false);
+        btnNormal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReturnNormalActionPerformed(evt);
+                btnNormalActionPerformed(evt);
             }
         });
 
-        btnSepia.setText("Sepia Image");
+        btnSepia.setText("Sepia");
         btnSepia.setEnabled(false);
         btnSepia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,7 +129,7 @@ public class ImageProcessor extends javax.swing.JFrame {
             }
         });
 
-        btnGreyScale.setText("GreyScale Image");
+        btnGreyScale.setText("GreyScale");
         btnGreyScale.setEnabled(false);
         btnGreyScale.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,7 +137,7 @@ public class ImageProcessor extends javax.swing.JFrame {
             }
         });
 
-        btnGaussianBlur.setText("Gaussian Blur Image");
+        btnGaussianBlur.setText("Gaussian Blur");
         btnGaussianBlur.setEnabled(false);
         btnGaussianBlur.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,7 +153,7 @@ public class ImageProcessor extends javax.swing.JFrame {
             }
         });
 
-        btnBlur.setText("Blur Image");
+        btnBlur.setText("Blur");
         btnBlur.setEnabled(false);
         btnBlur.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,7 +161,7 @@ public class ImageProcessor extends javax.swing.JFrame {
             }
         });
 
-        btnPixelated.setText("Pixelated Image");
+        btnPixelated.setText("Pixelated");
         btnPixelated.setEnabled(false);
         btnPixelated.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,27 +169,35 @@ public class ImageProcessor extends javax.swing.JFrame {
             }
         });
 
-        btnShowRedOnly.setText("Show Red Only");
-        btnShowRedOnly.setEnabled(false);
-        btnShowRedOnly.addActionListener(new java.awt.event.ActionListener() {
+        btnShowRed.setText("Show Red");
+        btnShowRed.setEnabled(false);
+        btnShowRed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnShowRedOnlyActionPerformed(evt);
+                btnShowRedActionPerformed(evt);
             }
         });
 
-        btnShowGreenOnly.setText("Show Green Only");
-        btnShowGreenOnly.setEnabled(false);
-        btnShowGreenOnly.addActionListener(new java.awt.event.ActionListener() {
+        btnShowGreen.setText("Show Green");
+        btnShowGreen.setEnabled(false);
+        btnShowGreen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnShowGreenOnlyActionPerformed(evt);
+                btnShowGreenActionPerformed(evt);
             }
         });
 
-        btnShowBlueOnly.setText("Show Blue Only");
-        btnShowBlueOnly.setEnabled(false);
-        btnShowBlueOnly.addActionListener(new java.awt.event.ActionListener() {
+        btnShowBlue.setText("Show Blue");
+        btnShowBlue.setEnabled(false);
+        btnShowBlue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnShowBlueOnlyActionPerformed(evt);
+                btnShowBlueActionPerformed(evt);
+            }
+        });
+
+        btnTransparency.setText("Transparency");
+        btnTransparency.setEnabled(false);
+        btnTransparency.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTransparencyActionPerformed(evt);
             }
         });
 
@@ -204,15 +213,17 @@ public class ImageProcessor extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnBrighter)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnShowRedOnly)
+                        .addComponent(btnShowRed)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnShowGreenOnly)
+                        .addComponent(btnShowGreen)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnShowBlueOnly))
+                        .addComponent(btnShowBlue)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnTransparency))
                     .addGroup(pnlButtonLayout.createSequentialGroup()
-                        .addComponent(btnReturnNormal)
+                        .addComponent(btnNormal)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnInvertImage)
+                        .addComponent(btnInvert)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnGreyScale)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -227,16 +238,16 @@ public class ImageProcessor extends javax.swing.JFrame {
                         .addComponent(btnBlur)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnPixelated)))
-                .addContainerGap(355, Short.MAX_VALUE))
+                .addContainerGap(369, Short.MAX_VALUE))
         );
         pnlButtonLayout.setVerticalGroup(
             pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlButtonLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnInvertImage)
+                    .addComponent(btnInvert)
                     .addComponent(btnGreyScale)
-                    .addComponent(btnReturnNormal)
+                    .addComponent(btnNormal)
                     .addComponent(btnSepia)
                     .addComponent(btnMonoChrome))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -249,9 +260,10 @@ public class ImageProcessor extends javax.swing.JFrame {
                 .addGroup(pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnBrighter)
-                        .addComponent(btnShowRedOnly)
-                        .addComponent(btnShowGreenOnly)
-                        .addComponent(btnShowBlueOnly))
+                        .addComponent(btnShowRed)
+                        .addComponent(btnShowGreen)
+                        .addComponent(btnShowBlue)
+                        .addComponent(btnTransparency))
                     .addComponent(btnDarker))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -274,7 +286,7 @@ public class ImageProcessor extends javax.swing.JFrame {
                 .addComponent(lblImage, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addGap(30, 30, 30))
         );
 
         scrlpnMain.setViewportView(pnlMain);
@@ -335,8 +347,8 @@ public class ImageProcessor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void enableButton(){
-        btnReturnNormal.setEnabled(true);
-        btnInvertImage.setEnabled(true);
+        btnNormal.setEnabled(true);
+        btnInvert.setEnabled(true);
         btnGreyScale.setEnabled(true);
         btnSepia.setEnabled(true);
         btnMonoChrome.setEnabled(true);
@@ -348,9 +360,10 @@ public class ImageProcessor extends javax.swing.JFrame {
         
         btnBrighter.setEnabled(true);
         btnDarker.setEnabled(true);
-        btnShowRedOnly.setEnabled(true);
-        btnShowGreenOnly.setEnabled(true);
-        btnShowBlueOnly.setEnabled(true);
+        btnShowRed.setEnabled(true);
+        btnShowGreen.setEnabled(true);
+        btnShowBlue.setEnabled(true);
+        btnTransparency.setEnabled(true);
     }
     
     private void openFileImage(){
@@ -380,7 +393,7 @@ public class ImageProcessor extends javax.swing.JFrame {
         return inputFile;
     }
     
-    private void btnInvertImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInvertImageActionPerformed
+    private void btnInvertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInvertActionPerformed
         System.out.println("Invert Image Button Clicked");
         inputFile = readImage();
 
@@ -397,7 +410,7 @@ public class ImageProcessor extends javax.swing.JFrame {
         }
         lblImage.setIcon(new ImageIcon(inputFile));
         System.out.println("Image Processing Invert Done");
-    }//GEN-LAST:event_btnInvertImageActionPerformed
+    }//GEN-LAST:event_btnInvertActionPerformed
 
     private void btnGreyScaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGreyScaleActionPerformed
         System.out.println("GreyScale Button Clicked");
@@ -440,12 +453,12 @@ public class ImageProcessor extends javax.swing.JFrame {
         System.out.println("Image Processing MonoChrome Done");
     }//GEN-LAST:event_btnMonoChromeActionPerformed
 
-    private void btnReturnNormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnNormalActionPerformed
+    private void btnNormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNormalActionPerformed
         System.out.println("Return Normal Button Clicked");
         ImageIcon image = new ImageIcon(pathImage);   
         lblImage.setIcon(image);
         System.out.println("Return Normal Done");
-    }//GEN-LAST:event_btnReturnNormalActionPerformed
+    }//GEN-LAST:event_btnNormalActionPerformed
 
     private void btnSepiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSepiaActionPerformed
         System.out.println("Sepia Image Button Clicked");
@@ -768,7 +781,7 @@ public class ImageProcessor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnPixelatedActionPerformed
 
-    private void btnShowRedOnlyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowRedOnlyActionPerformed
+    private void btnShowRedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowRedActionPerformed
         System.out.println("Show Red Only Button Clicked");
         inputFile = readImage();
 
@@ -782,9 +795,9 @@ public class ImageProcessor extends javax.swing.JFrame {
         }
         lblImage.setIcon(new ImageIcon(inputFile));
         System.out.println("Image Processing Show Red Only Done");
-    }//GEN-LAST:event_btnShowRedOnlyActionPerformed
+    }//GEN-LAST:event_btnShowRedActionPerformed
 
-    private void btnShowGreenOnlyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowGreenOnlyActionPerformed
+    private void btnShowGreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowGreenActionPerformed
         System.out.println("Show Green Only Button Clicked");
         inputFile = readImage();
 
@@ -798,9 +811,9 @@ public class ImageProcessor extends javax.swing.JFrame {
         }
         lblImage.setIcon(new ImageIcon(inputFile));
         System.out.println("Image Processing Show Green Only Done");
-    }//GEN-LAST:event_btnShowGreenOnlyActionPerformed
+    }//GEN-LAST:event_btnShowGreenActionPerformed
 
-    private void btnShowBlueOnlyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowBlueOnlyActionPerformed
+    private void btnShowBlueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowBlueActionPerformed
         System.out.println("Show Blue Only Button Clicked");
         inputFile = readImage();
 
@@ -814,7 +827,31 @@ public class ImageProcessor extends javax.swing.JFrame {
         }
         lblImage.setIcon(new ImageIcon(inputFile));
         System.out.println("Image Processing Show Blue Only Done");
-    }//GEN-LAST:event_btnShowBlueOnlyActionPerformed
+    }//GEN-LAST:event_btnShowBlueActionPerformed
+
+    private void btnTransparencyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransparencyActionPerformed
+        System.out.println("Transparency Button Clicked");
+        inputFile = readImage();
+
+        String alphaValueInputDialog = JOptionPane.showInputDialog("Input transparency range [0-255] :");
+        if(alphaValueInputDialog == null){
+            System.out.println("Transparency Cancelled");
+        } else if (isNotNumber(alphaValueInputDialog)){
+           showErrorInputIsNotANumber();
+        } else {
+            int newAlpha = Integer.parseInt(alphaValueInputDialog);
+            for (int x = 0; x < inputFile.getWidth(); x++) {
+                for (int y = 0; y < inputFile.getHeight(); y++) {
+                    int rgba = inputFile.getRGB(x, y);
+                    Color col = new Color(rgba, true);
+                    col = new Color(col.getRed(), col.getGreen(), col.getBlue(), newAlpha & col.getAlpha());
+                    inputFile.setRGB(x, y, col.getRGB());
+                }
+            }
+        }
+        lblImage.setIcon(new ImageIcon(inputFile));
+        System.out.println("Image Processing Transparency Done");
+    }//GEN-LAST:event_btnTransparencyActionPerformed
     
     public static void run(){
         ImageProcessor ip = new ImageProcessor();
@@ -848,14 +885,15 @@ public class ImageProcessor extends javax.swing.JFrame {
     private javax.swing.JButton btnFailureBlur;
     private javax.swing.JButton btnGaussianBlur;
     private javax.swing.JButton btnGreyScale;
-    private javax.swing.JButton btnInvertImage;
+    private javax.swing.JButton btnInvert;
     private javax.swing.JButton btnMonoChrome;
+    private javax.swing.JButton btnNormal;
     private javax.swing.JButton btnPixelated;
-    private javax.swing.JButton btnReturnNormal;
     private javax.swing.JButton btnSepia;
-    private javax.swing.JButton btnShowBlueOnly;
-    private javax.swing.JButton btnShowGreenOnly;
-    private javax.swing.JButton btnShowRedOnly;
+    private javax.swing.JButton btnShowBlue;
+    private javax.swing.JButton btnShowGreen;
+    private javax.swing.JButton btnShowRed;
+    private javax.swing.JButton btnTransparency;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JLabel lblImage;
     private javax.swing.JMenu menuEdit;

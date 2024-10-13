@@ -159,7 +159,7 @@
                       <Component id="lblImage" pref="516" max="32767" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="pnlButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -206,16 +206,18 @@
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="btnBrighter" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="btnShowRedOnly" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnShowRed" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="btnShowGreenOnly" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnShowGreen" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="btnShowBlueOnly" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnShowBlue" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="btnTransparency" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="btnReturnNormal" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnNormal" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="btnInvertImage" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnInvert" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="btnGreyScale" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -233,7 +235,7 @@
                                   <Component id="btnPixelated" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="355" max="32767" attributes="0"/>
+                          <EmptySpace pref="369" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -242,9 +244,9 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="btnInvertImage" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnInvert" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnGreyScale" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnReturnNormal" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnNormal" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnSepia" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnMonoChrome" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -259,9 +261,10 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="btnBrighter" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnShowRedOnly" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnShowGreenOnly" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnShowBlueOnly" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnShowRed" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnShowGreen" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnShowBlue" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnTransparency" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="btnDarker" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -273,7 +276,7 @@
               <SubComponents>
                 <Component class="javax.swing.JButton" name="btnFailureBlur">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Failure Blur Image"/>
+                    <Property name="text" type="java.lang.String" value="Failure Blur"/>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
@@ -291,34 +294,34 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="btnMonoChrome">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="MonoChrome Image"/>
+                    <Property name="text" type="java.lang.String" value="MonoChrome"/>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMonoChromeActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="btnInvertImage">
+                <Component class="javax.swing.JButton" name="btnInvert">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Invert Image"/>
+                    <Property name="text" type="java.lang.String" value="Invert"/>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInvertImageActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInvertActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="btnReturnNormal">
+                <Component class="javax.swing.JButton" name="btnNormal">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Return Normal"/>
+                    <Property name="text" type="java.lang.String" value="Normal"/>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReturnNormalActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNormalActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnSepia">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Sepia Image"/>
+                    <Property name="text" type="java.lang.String" value="Sepia"/>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
@@ -327,7 +330,7 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="btnGreyScale">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="GreyScale Image"/>
+                    <Property name="text" type="java.lang.String" value="GreyScale"/>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
@@ -336,7 +339,7 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="btnGaussianBlur">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Gaussian Blur Image"/>
+                    <Property name="text" type="java.lang.String" value="Gaussian Blur"/>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
@@ -354,7 +357,7 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="btnBlur">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Blur Image"/>
+                    <Property name="text" type="java.lang.String" value="Blur"/>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
@@ -363,38 +366,47 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="btnPixelated">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Pixelated Image"/>
+                    <Property name="text" type="java.lang.String" value="Pixelated"/>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPixelatedActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="btnShowRedOnly">
+                <Component class="javax.swing.JButton" name="btnShowRed">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Show Red Only"/>
+                    <Property name="text" type="java.lang.String" value="Show Red"/>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnShowRedOnlyActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnShowRedActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="btnShowGreenOnly">
+                <Component class="javax.swing.JButton" name="btnShowGreen">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Show Green Only"/>
+                    <Property name="text" type="java.lang.String" value="Show Green"/>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnShowGreenOnlyActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnShowGreenActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="btnShowBlueOnly">
+                <Component class="javax.swing.JButton" name="btnShowBlue">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Show Blue Only"/>
+                    <Property name="text" type="java.lang.String" value="Show Blue"/>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnShowBlueOnlyActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnShowBlueActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnTransparency">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Transparency"/>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTransparencyActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
