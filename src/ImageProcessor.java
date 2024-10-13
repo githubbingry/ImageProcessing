@@ -390,7 +390,8 @@ public class ImageProcessor extends javax.swing.JFrame {
                 Color col = new Color(rgba, true);
                 col = new Color(255 - col.getRed(),
                                 255 - col.getGreen(),
-                                255 - col.getBlue());
+                                255 - col.getBlue(),
+                                col.getAlpha());
                 inputFile.setRGB(x, y, col.getRGB());
             }
         }
@@ -407,7 +408,11 @@ public class ImageProcessor extends javax.swing.JFrame {
                 int rgba = inputFile.getRGB(x, y);
                 Color col = new Color(rgba, true);
                 int greyLevel = (col.getRed() + col.getGreen()+ col.getBlue())/3;
-                col = new Color((greyLevel << 16) + (greyLevel << 8) + greyLevel);
+                col = new Color((col.getAlpha() << 24)
+                                + (greyLevel << 16)
+                                + (greyLevel << 8)
+                                + greyLevel,
+                                true);
                 inputFile.setRGB(x, y, col.getRGB());
             }
         }
@@ -425,9 +430,9 @@ public class ImageProcessor extends javax.swing.JFrame {
                 Color col = new Color(rgba, true);
                 int MONO_THRESHOLD = 368;
                 if (col.getRed() + col.getGreen() + col.getBlue() > MONO_THRESHOLD)
-                    col = new Color(255, 255, 255);
+                    col = new Color(255, 255, 255, col.getAlpha());
                 else
-                    col = new Color(0, 0, 0);
+                    col = new Color(0, 0, 0, col.getAlpha());
                 inputFile.setRGB(x, y, col.getRGB());
             }
         }
@@ -458,7 +463,8 @@ public class ImageProcessor extends javax.swing.JFrame {
                 int newB = (int)(0.272*R + 0.534*G + 0.131*B);
                 col = new Color ((newR > 255 ? 255 : newR)
                                 ,(newG > 255 ? 255 : newG)
-                                ,(newB > 255 ? 255 : newB));
+                                ,(newB > 255 ? 255 : newB)
+                                ,col.getAlpha());
                 inputFile.setRGB(x, y, col.getRGB());
             }
         }
@@ -481,7 +487,8 @@ public class ImageProcessor extends javax.swing.JFrame {
                 col = new Color(
                         (col.getRed()+25 > 255 ? 255 : col.getRed()+25)
                         , (col.getGreen()+25 > 255 ? 255 : col.getGreen()+25)
-                        , col.getBlue()+25 > 255 ? 255 : col.getBlue()+25);
+                        , col.getBlue()+25 > 255 ? 255 : col.getBlue()+25
+                        ,col.getAlpha());
                 inputFile.setRGB(x, y, col.getRGB());
             }
         }
@@ -500,7 +507,8 @@ public class ImageProcessor extends javax.swing.JFrame {
                 col = new Color(
                         (col.getRed()-25 < 0 ? 0 : col.getRed()-25)
                         , (col.getGreen()-25 < 0 ? 0 : col.getGreen()-25)
-                        , col.getBlue()-25 < 0 ? 0 : col.getBlue()-25);
+                        , col.getBlue()-25 < 0 ? 0 : col.getBlue()-25
+                        , col.getAlpha());
                 inputFile.setRGB(x, y, col.getRGB());
             }
         }
@@ -518,7 +526,7 @@ public class ImageProcessor extends javax.swing.JFrame {
     }
     
     private void showErrorInputIsNotANumber(){
-        JOptionPane.showMessageDialog(null, "Input must be number!", "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Input must be a non-negative number!", "Error", JOptionPane.ERROR_MESSAGE);
     }
     
     private void showErrorInputIsTooBig(){
@@ -557,7 +565,7 @@ public class ImageProcessor extends javax.swing.JFrame {
                     }
                     long pixelCount = 1 + rangeBlurAdj*2;
                     pixelCount *= pixelCount;
-                    Color col = new Color((int)(sumRGBPixel/pixelCount));
+                    Color col = new Color((int)(sumRGBPixel/pixelCount), true);
                     inputFile.setRGB(x, y, col.getRGB());
                 }
             }
@@ -677,13 +685,15 @@ public class ImageProcessor extends javax.swing.JFrame {
 
     private void mnitSaveImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnitSaveImageActionPerformed
         System.out.println("Save Image Clicked");
-        String fileName = JOptionPane.showInputDialog("Input File Name : ");
+        String fileName = JOptionPane.showInputDialog("Input File Name : (must include the image extension, i.e : .jpeg/.jpg/.png)");
         if (fileName == null){
+            showErrorInputIsNotANumber();
             System.out.println("Save Failed");
         } else {
             try {
-                ImageIO.write(inputFile, "png", new File(System.getProperty("user.dir")+"\\src\\assets\\"+fileName));
-                System.out.println("Save Failed");
+                // change the directory to ur liking
+                ImageIO.write(inputFile, "png", new File(System.getProperty("user.dir")+"\\src\\saved_images\\"+fileName));
+                System.out.println("Save Success");
             } catch (IOException ex) {
                 Logger.getLogger(ImageProcessor.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -766,7 +776,7 @@ public class ImageProcessor extends javax.swing.JFrame {
             for (int y = 0; y < inputFile.getHeight(); y++) {
                 int rgba = inputFile.getRGB(x, y);
                 Color col = new Color(rgba, true);
-                col = new Color(col.getRed(), 0, 0);
+                col = new Color(col.getRed(), 0, 0, col.getAlpha());
                 inputFile.setRGB(x, y, col.getRGB());
             }
         }
@@ -782,7 +792,7 @@ public class ImageProcessor extends javax.swing.JFrame {
             for (int y = 0; y < inputFile.getHeight(); y++) {
                 int rgba = inputFile.getRGB(x, y);
                 Color col = new Color(rgba, true);
-                col = new Color(0, col.getGreen(), 0);
+                col = new Color(0, col.getGreen(), 0, col.getAlpha());
                 inputFile.setRGB(x, y, col.getRGB());
             }
         }
@@ -798,7 +808,7 @@ public class ImageProcessor extends javax.swing.JFrame {
             for (int y = 0; y < inputFile.getHeight(); y++) {
                 int rgba = inputFile.getRGB(x, y);
                 Color col = new Color(rgba, true);
-                col = new Color(0, 0, col.getBlue());
+                col = new Color(0, 0, col.getBlue(), col.getAlpha());
                 inputFile.setRGB(x, y, col.getRGB());
             }
         }
