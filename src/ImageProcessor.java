@@ -63,6 +63,7 @@ public class ImageProcessor extends javax.swing.JFrame {
         btnFailureBlur = new javax.swing.JButton();
         btnGaussianBlur = new javax.swing.JButton();
         btnBlur = new javax.swing.JButton();
+        btnMotionBlur = new javax.swing.JButton();
         btnPixelated = new javax.swing.JButton();
         btnBrighter = new javax.swing.JButton();
         btnDarker = new javax.swing.JButton();
@@ -159,6 +160,14 @@ public class ImageProcessor extends javax.swing.JFrame {
             }
         });
 
+        btnMotionBlur.setText("Motion Blur");
+        btnMotionBlur.setEnabled(false);
+        btnMotionBlur.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMotionBlurActionPerformed(evt);
+            }
+        });
+
         btnPixelated.setText("Pixelated");
         btnPixelated.setEnabled(false);
         btnPixelated.addActionListener(new java.awt.event.ActionListener() {
@@ -251,6 +260,8 @@ public class ImageProcessor extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnBlur)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnMotionBlur)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnPixelated)))
                 .addContainerGap(369, Short.MAX_VALUE))
         );
@@ -269,7 +280,8 @@ public class ImageProcessor extends javax.swing.JFrame {
                     .addComponent(btnFailureBlur)
                     .addComponent(btnGaussianBlur)
                     .addComponent(btnBlur)
-                    .addComponent(btnPixelated))
+                    .addComponent(btnPixelated)
+                    .addComponent(btnMotionBlur))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -372,6 +384,7 @@ public class ImageProcessor extends javax.swing.JFrame {
         btnFailureBlur.setEnabled(true);
         btnGaussianBlur.setEnabled(true);
         btnBlur.setEnabled(true);
+        btnMotionBlur.setEnabled(true);
         btnPixelated.setEnabled(true);
         
         btnBrighter.setEnabled(true);
@@ -404,7 +417,30 @@ public class ImageProcessor extends javax.swing.JFrame {
         }
         return inputFile;
     }
+    
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ isNotANonNegativeNumber, showErrorInputIsNotANonNegativeNumber, showErrorInputIsTooBig, showErrorThicknessGTRange
 
+    private boolean isNotANonNegativeNumber(String s){
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) < '0' || s.charAt(i) > '9'){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    private void showErrorInputIsNotANonNegativeNumber(){
+        JOptionPane.showMessageDialog(null, "Input must be a non-negative number!", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    private void showErrorInputIsTooBig(){
+        JOptionPane.showMessageDialog(null, "Input is too big!", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    private void showErrorThicknessGTRange(){
+        JOptionPane.showMessageDialog(null, "Thickness can't be bigger than range!", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Menu Bar and its Item
 
     private void menuitemOpenImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuitemOpenImageActionPerformed
@@ -415,7 +451,7 @@ public class ImageProcessor extends javax.swing.JFrame {
         System.out.println("Save Image Clicked");
         String fileName = JOptionPane.showInputDialog("Input File Name : (must include the image extension, i.e : .jpeg/.jpg/.png)");
         if (fileName == null){
-            showErrorInputIsNotANumber();
+            showErrorInputIsNotANonNegativeNumber();
             System.out.println("Save Failed");
         } else {
             try {
@@ -434,6 +470,16 @@ public class ImageProcessor extends javax.swing.JFrame {
         openFileImage();
     }//GEN-LAST:event_lblImageMouseClicked
 
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ use this when u wanna see the rgb value
+/*
+if (x == 0 && y == 0){
+    System.out.println(sumRGBPixel[COL_RED]);
+    System.out.println(sumRGBPixel[COL_GREEN]);
+    System.out.println(sumRGBPixel[COL_BLUE]);
+    System.out.println(sumRGBPixel[COL_ALPHA]);
+}
+*/
+    
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ row 1 : normal, invert, greyscale, sepia, monochrome
 
     private void btnNormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNormalActionPerformed
@@ -484,7 +530,7 @@ public class ImageProcessor extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGreyScaleActionPerformed
 
     private void btnSepiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSepiaActionPerformed
-        System.out.println("Sepia Image Button Clicked");
+        System.out.println("Sepia Button Clicked");
         inputFile = readImage();
 
         for (int x = 0; x < inputFile.getWidth(); x++) {
@@ -509,45 +555,35 @@ public class ImageProcessor extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSepiaActionPerformed
 
     private void btnMonoChromeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonoChromeActionPerformed
-        System.out.println("MonoChrome Image Button Clicked");
+        System.out.println("MonoChrome Button Clicked");
         inputFile = readImage();
 
-        for (int x = 0; x < inputFile.getWidth(); x++) {
-            for (int y = 0; y < inputFile.getHeight(); y++) {
-                int rgba = inputFile.getRGB(x, y);
-                Color col = new Color(rgba, true);
-                int MONO_THRESHOLD = 368;
-                if (col.getRed() + col.getGreen() + col.getBlue() > MONO_THRESHOLD)
-                    col = new Color(255, 255, 255, col.getAlpha());
-                else
-                    col = new Color(0, 0, 0, col.getAlpha());
-                inputFile.setRGB(x, y, col.getRGB());
+        String monoThresholdInputDialog = JOptionPane.showInputDialog("Input mono threshold [0-765], 368 recommended");
+        if(monoThresholdInputDialog == null){
+            System.out.println("MonoChrome Cancelled");
+        } else if (isNotANonNegativeNumber(monoThresholdInputDialog)){
+           showErrorInputIsNotANonNegativeNumber();
+        } else if (Integer.parseInt(monoThresholdInputDialog) > 765){
+           showErrorInputIsTooBig();
+        } else {
+            int MONO_THRESHOLD = Integer.parseInt(monoThresholdInputDialog);
+            for (int x = 0; x < inputFile.getWidth(); x++) {
+                for (int y = 0; y < inputFile.getHeight(); y++) {
+                    int rgba = inputFile.getRGB(x, y);
+                    Color col = new Color(rgba, true);
+                    if (col.getRed() + col.getGreen() + col.getBlue() > MONO_THRESHOLD)
+                        col = new Color(255, 255, 255, col.getAlpha());
+                    else
+                        col = new Color(0, 0, 0, col.getAlpha());
+                    inputFile.setRGB(x, y, col.getRGB());
+                }
             }
+            lblImage.setIcon(new ImageIcon(inputFile));
         }
-        lblImage.setIcon(new ImageIcon(inputFile));
         System.out.println("Image Processing MonoChrome Done");
     }//GEN-LAST:event_btnMonoChromeActionPerformed
-
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ isNotNumber, showErrorInputIsNotANumber, showErrorInputIsTooBig
-
-    private boolean isNotNumber(String s){
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) < '0' || s.charAt(i) > '9'){
-                return true;
-            }
-        }
-        return false;
-    }
     
-    private void showErrorInputIsNotANumber(){
-        JOptionPane.showMessageDialog(null, "Input must be a non-negative number!", "Error", JOptionPane.ERROR_MESSAGE);
-    }
-    
-    private void showErrorInputIsTooBig(){
-        JOptionPane.showMessageDialog(null, "Input is too big!", "Error", JOptionPane.ERROR_MESSAGE);
-    }
-
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ row 2 : failureblur, gaussianblur, blur, pixelated
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ row 2 : failureblur, gaussianblur, blur, motionblur, pixelated
     
     private void btnFailureBlurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFailureBlurActionPerformed
         System.out.println("Failure Blur Button Clicked");
@@ -555,8 +591,8 @@ public class ImageProcessor extends javax.swing.JFrame {
         String rangeInputDialog = JOptionPane.showInputDialog("Input blur range");
         if(rangeInputDialog == null){
             System.out.println("Failure Blur Cancelled");
-        } else if (isNotNumber(rangeInputDialog)){
-           showErrorInputIsNotANumber();
+        } else if (isNotANonNegativeNumber(rangeInputDialog)){
+           showErrorInputIsNotANonNegativeNumber();
         } else {
             System.out.println("Processing");
             int[][] rgbaArray = new int[inputFile.getWidth()][inputFile.getHeight()];
@@ -639,6 +675,8 @@ public class ImageProcessor extends javax.swing.JFrame {
                         sumRGBPixel[COL_BLUE] += constantGrid[rangeBlurAdj+i][rangeBlurAdj+j]*rgbaArray[x+i][y+j][COL_BLUE];
                         sumRGBPixel[COL_ALPHA] += constantGrid[rangeBlurAdj+i][rangeBlurAdj+j]*rgbaArray[x+i][y+j][COL_ALPHA];
                     }
+                    // System.out.println("sumRGB : " + (x+i) + " " + (y+j) + " " + sumRGBPixel[COL_RED] + " " + sumRGBPixel[COL_GREEN] + " " + sumRGBPixel[COL_BLUE] + " " + sumRGBPixel[COL_ALPHA]);
+                    // System.out.println("constant grid : " + constantGrid[rangeBlurAdj+i][rangeBlurAdj+j]);
                 }
             }
         }
@@ -670,11 +708,17 @@ public class ImageProcessor extends javax.swing.JFrame {
         System.out.println("Gaussian Blur Button Clicked");
         inputFile = readImage();
 
+        int failCheckAdvance = JOptionPane.showConfirmDialog(null, "Actually this Gaussian blur are a failure, proceed?", "Warning", JOptionPane.WARNING_MESSAGE);
+        if (failCheckAdvance == -1 || failCheckAdvance == 1 || failCheckAdvance == 2){
+            System.out.println("Gaussian Blur Cancelled");
+            return;
+        }
+        
         String rangeInputDialog = JOptionPane.showInputDialog("Input blur range");
         if(rangeInputDialog == null){
             System.out.println("Gaussian Blur Cancelled");
-        } else if (isNotNumber(rangeInputDialog)){
-           showErrorInputIsNotANumber();
+        } else if (isNotANonNegativeNumber(rangeInputDialog)){
+           showErrorInputIsNotANonNegativeNumber();
         } else {
             int rangeBlurAdj = Integer.parseInt(rangeInputDialog);
             if (rangeBlurAdj > 10){
@@ -700,7 +744,7 @@ public class ImageProcessor extends javax.swing.JFrame {
             System.out.println("Image Processing Gaussian Blur Done");
         }
     }//GEN-LAST:event_btnGaussianBlurActionPerformed
-
+    
     private void btnBlurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBlurActionPerformed
         System.out.println("Blur Button Clicked");
         inputFile = readImage();
@@ -708,8 +752,8 @@ public class ImageProcessor extends javax.swing.JFrame {
         String rangeInputDialog = JOptionPane.showInputDialog("Input blur range");
         if(rangeInputDialog == null){
             System.out.println("Blur Cancelled");
-        } else if (isNotNumber(rangeInputDialog)){
-           showErrorInputIsNotANumber();
+        } else if (isNotANonNegativeNumber(rangeInputDialog)){
+           showErrorInputIsNotANonNegativeNumber();
         } else {
             System.out.println("Processing");
             int rangeBlurAdj = Integer.parseInt(rangeInputDialog);
@@ -731,6 +775,102 @@ public class ImageProcessor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnBlurActionPerformed
 
+    private int[][] MotionGrid(String direction, int range, int thickness){
+        int[][] a = null;
+        switch (direction) {
+            case "HORIZONTAL" -> {
+                a = new int[2*range+1][2*range+1];
+                for (int i = -range; i <= range; i++) {
+                    for (int j = 1-thickness; j <= thickness-1; j++) {
+                        a[range+i][thickness+j] = thickness-Math.abs(j);
+                    }
+                }
+            }
+            case "VERTICAL" -> {
+                a = new int[2*range+1][2*range+1];
+                for (int i = 1-thickness; i <= thickness-1; i++) {
+                    for (int j = -range; j <= range; j++) {
+                        a[thickness+i][range+j] = thickness-Math.abs(i);
+                        // System.out.print(a[thickness+i][range+j] + (j == range ? "\n" : " "));
+                    }
+                }
+            }
+            case "DIAGONAL_LEFT_TO_RIGHT" -> {
+            }
+            default -> {
+            }
+        }
+//            a = new int[2*range+1][2*range+1];
+        return a;
+    }
+    
+    private void btnMotionBlurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMotionBlurActionPerformed
+        System.out.println("Motion Blur Button Clicked");
+        inputFile = readImage();
+
+        String directionConfirmDialog = (String)JOptionPane
+                        .showInputDialog(null, "Input image motion direction will blur"
+                                , "Input Direction", JOptionPane.QUESTION_MESSAGE
+                                , new ImageIcon(System.getProperty("user.dir")+"\\src\\assets\\logoImageProcessor_motionBlur31.png")
+                                , new String[]{"HORIZONTAL", "VERTICAL", "DIAGONAL_LEFT_TO_RIGHT", "DIAGONAL_RIGHT_TO_LEFT"}
+                                , 0);
+        if(directionConfirmDialog == null){
+            System.out.println("Motion Blur Cancelled");
+            return;
+        }
+        
+        String rangeInputDialog = JOptionPane.showInputDialog("Input blur range");
+        if(rangeInputDialog == null){
+            System.out.println("Motion Blur Cancelled");
+            return;
+        }
+        
+        String thicknessInputDialog = JOptionPane.showInputDialog("Input blur thickness");
+        if(thicknessInputDialog == null){
+            System.out.println("Motion Blur Cancelled");
+            return;
+        }
+        
+        if (isNotANonNegativeNumber(rangeInputDialog) || isNotANonNegativeNumber(thicknessInputDialog)){
+           showErrorInputIsNotANonNegativeNumber();
+        } else {
+            int rangeBlurAdj = Integer.parseInt(rangeInputDialog);
+            int thicknessBlur = Integer.parseInt(thicknessInputDialog);
+            if (thicknessBlur > rangeBlurAdj){
+                showErrorThicknessGTRange();
+            }
+            System.out.println("Processing");
+            System.out.println(directionConfirmDialog + " " + rangeInputDialog + " " + thicknessBlur);
+            int[][][] rgbaArray = rgbValueImage();
+            int[][] motionGrid = MotionGrid(directionConfirmDialog, rangeBlurAdj, thicknessBlur);
+            long pixelCount = thicknessBlur*thicknessBlur*(2*rangeBlurAdj+1);
+            if (directionConfirmDialog.equals("HORIZONTAL") || directionConfirmDialog.equals("vERTICAL")){
+                // do nothing cuz the pixelcount are correct
+            } else {
+//                pixelCount = ;
+            }
+            for (int x = 0; x < inputFile.getWidth(); x++) {
+                for (int y = 0; y < inputFile.getHeight(); y++) {
+                    long[] sumRGBPixel = sumRGBPixel(rangeBlurAdj, x, y, rgbaArray, motionGrid);
+//                    if (x == 0 && y == 0){
+                        // System.out.println("\tmotion blur pixel x,y :" +x + " " + y);
+                        // System.out.print(sumRGBPixel[COL_RED]/pixelCount + " ");
+                        // System.out.print(sumRGBPixel[COL_GREEN]/pixelCount + " ");
+                        // System.out.print(sumRGBPixel[COL_BLUE]/pixelCount + " ");
+                        // System.out.print(sumRGBPixel[COL_ALPHA]/pixelCount + "\n");
+//                    }
+                    Color col = new Color((int)(sumRGBPixel[COL_RED]/pixelCount),
+                                        (int)(sumRGBPixel[COL_GREEN]/pixelCount),
+                                        (int)(sumRGBPixel[COL_BLUE]/pixelCount),
+                                        (int)(sumRGBPixel[COL_ALPHA]/pixelCount));
+                    inputFile.setRGB(x, y, col.getRGB());
+                }
+            }
+            lblImage.setIcon(new ImageIcon(inputFile));
+            System.out.println("Image Processing Motion Blur Done");
+        }
+    }//GEN-LAST:event_btnMotionBlurActionPerformed
+
     private void btnPixelatedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPixelatedActionPerformed
         System.out.println("Pixelated Button Clicked");
         inputFile = readImage();
@@ -738,8 +878,8 @@ public class ImageProcessor extends javax.swing.JFrame {
         String rangeInputDialog = JOptionPane.showInputDialog("Input pixel range");
         if(rangeInputDialog == null){
             System.out.println("Pixelated Cancelled");
-        } else if (isNotNumber(rangeInputDialog)){
-           showErrorInputIsNotANumber();
+        } else if (isNotANonNegativeNumber(rangeInputDialog)){
+           showErrorInputIsNotANonNegativeNumber();
         } else {
             System.out.println("Processing");
             int rangeBlurAdj = Integer.parseInt(rangeInputDialog);
@@ -824,7 +964,7 @@ public class ImageProcessor extends javax.swing.JFrame {
             }
         }
         lblImage.setIcon(new ImageIcon(inputFile));
-        System.out.println("Image Processing Show Red Only Done");
+        System.out.println("Image Processing Show Red Done");
     }//GEN-LAST:event_btnShowRedActionPerformed
 
     private void btnShowGreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowGreenActionPerformed
@@ -840,7 +980,7 @@ public class ImageProcessor extends javax.swing.JFrame {
             }
         }
         lblImage.setIcon(new ImageIcon(inputFile));
-        System.out.println("Image Processing Show Green Only Done");
+        System.out.println("Image Processing Show Green Done");
     }//GEN-LAST:event_btnShowGreenActionPerformed
 
     private void btnShowBlueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowBlueActionPerformed
@@ -856,7 +996,7 @@ public class ImageProcessor extends javax.swing.JFrame {
             }
         }
         lblImage.setIcon(new ImageIcon(inputFile));
-        System.out.println("Image Processing Show Blue Only Done");
+        System.out.println("Image Processing Show Blue Done");
     }//GEN-LAST:event_btnShowBlueActionPerformed
 
     private void btnTransparencyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransparencyActionPerformed
@@ -866,15 +1006,16 @@ public class ImageProcessor extends javax.swing.JFrame {
         String alphaValueInputDialog = JOptionPane.showInputDialog("Input transparency range [0-255] :");
         if(alphaValueInputDialog == null){
             System.out.println("Transparency Cancelled");
-        } else if (isNotNumber(alphaValueInputDialog)){
-           showErrorInputIsNotANumber();
+        } else if (isNotANonNegativeNumber(alphaValueInputDialog)){
+           showErrorInputIsNotANonNegativeNumber();
         } else {
             int newAlpha = Integer.parseInt(alphaValueInputDialog);
             for (int x = 0; x < inputFile.getWidth(); x++) {
                 for (int y = 0; y < inputFile.getHeight(); y++) {
                     int rgba = inputFile.getRGB(x, y);
                     Color col = new Color(rgba, true);
-                    col = new Color(col.getRed(), col.getGreen(), col.getBlue(), newAlpha & col.getAlpha());
+                    col = new Color(col.getRed(), col.getGreen(), col.getBlue(),
+                            (newAlpha < 0 ? 0 : newAlpha > 255 ? 255 : newAlpha) & col.getAlpha());
                     inputFile.setRGB(x, y, col.getRGB());
                 }
             }
@@ -903,6 +1044,7 @@ public class ImageProcessor extends javax.swing.JFrame {
     private javax.swing.JButton btnGreyScale;
     private javax.swing.JButton btnInvert;
     private javax.swing.JButton btnMonoChrome;
+    private javax.swing.JButton btnMotionBlur;
     private javax.swing.JButton btnNormal;
     private javax.swing.JButton btnPixelated;
     private javax.swing.JButton btnSepia;

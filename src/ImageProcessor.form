@@ -232,6 +232,8 @@
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="btnBlur" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="btnMotionBlur" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="btnPixelated" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -256,6 +258,7 @@
                               <Component id="btnGaussianBlur" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnBlur" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnPixelated" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnMotionBlur" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -344,6 +347,15 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBlurActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnMotionBlur">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Motion Blur"/>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMotionBlurActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnPixelated">
